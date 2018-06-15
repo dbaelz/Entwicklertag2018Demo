@@ -1,0 +1,30 @@
+{
+  "user": [
+    {
+      "id": "dbaelz",
+      "username": "dbaelz",
+      "description": "Android developer. Does stuff with Kotlin",
+      "points": 42
+    },
+    {
+      "id": "janedoe",
+      "username": "janedoe",
+      "description": "A real Kotlin Guru",
+      "points": 100
+    },
+    {
+      "id": "jondoe",
+      "username": "jondoe",
+      "description": "Kotlin Master",
+      "points": 83
+    },
+    {
+      "id": "another",
+      "username": "another",
+      "points": 23
+    }
+  ],
+  "stats": {
+    "average_points": 62
+  }
+}
