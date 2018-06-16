@@ -34,14 +34,14 @@ class MainActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<User>, response: Response<User>?) {
                         Log.d("UserService.getUser", "onResponse -> $response - body -> ${response?.body()}")
 
-                        response?.body()?.let { user ->
-                            cardView_username.text = user.username
-                            user.description?.isNotEmpty().apply {
-                                cardView_description.text = user.description
+                        response?.body()?.apply {
+                            cardView_username.text = username
+                            description?.isNotEmpty().apply {
+                                cardView_description.text = description
                             }
-                            cardView_points.text = getString(R.string.cardView_points_text, user.points)
+                            cardView_points.text = getString(R.string.cardView_points_text, points)
 
-                            if (user.hasMasterLevel()) {
+                            if (hasMasterLevel()) {
                                 cardView_username.setTextColor(getColor(R.color.colorAccent))
                                 cardView_points.setTextColor(getColor(R.color.colorAccent))
                             }
