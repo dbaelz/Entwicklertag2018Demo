@@ -7,24 +7,35 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/title_text"
+        android:textSize="24sp" />
+
     <EditText
         android:id="@+id/editText_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/username_hint"
-        android:inputType="text" />
+        android:inputType="text"
+        android:paddingTop="8dp" />
 
     <Button
         android:id="@+id/button_showUser"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:text="@string/button_show" />
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:visibility="gone"
         card_view:cardCornerRadius="4dp">
 
         <LinearLayout
@@ -42,20 +53,21 @@
                 tools:text="dbaelz" />
 
             <TextView
-                android:id="@+id/cardView_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:textSize="16sp"
-                tools:text="Just a developer" />
-
-            <TextView
                 android:id="@+id/cardView_points"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="16dp"
+                android:gravity="center"
+                android:paddingTop="4dp"
                 android:textSize="16sp"
                 tools:text="Points: 42" />
+
+            <TextView
+                android:id="@+id/cardView_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:textSize="16sp"
+                tools:text="Just a developer" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

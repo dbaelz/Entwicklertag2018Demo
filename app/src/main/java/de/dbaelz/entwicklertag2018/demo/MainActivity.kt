@@ -3,6 +3,7 @@ package de.dbaelz.entwicklertag2018.demo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import de.dbaelz.entwicklertag2018.demo.user.User
 import de.dbaelz.entwicklertag2018.demo.user.UserService
 import de.dbaelz.entwicklertag2018.demo.user.hasMasterLevel
@@ -29,12 +30,20 @@ class MainActivity : AppCompatActivity() {
                 UserService.getUser(username).enqueue(object : Callback<User> {
                     override fun onFailure(call: Call<User>, throwable: Throwable?) {
                         Log.d("UserService.getUser", "onFailure -> $throwable")
+                        cardView.visibility = View.GONE
                     }
 
                     override fun onResponse(call: Call<User>, response: Response<User>?) {
                         Log.d("UserService.getUser", "onResponse -> $response - body -> ${response?.body()}")
 
+                        response?.errorBody()?.let {
+                            cardView.visibility = View.GONE
+                            return
+                        }
+
                         response?.body()?.apply {
+                            cardView.visibility = View.VISIBLE
+
                             cardView_username.text = username
                             description?.isNotEmpty().apply {
                                 cardView_description.text = description
@@ -48,6 +57,8 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 })
+            } else {
+                cardView.visibility = View.GONE
             }
         }
     }
