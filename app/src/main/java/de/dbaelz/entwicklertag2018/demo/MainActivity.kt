@@ -18,48 +18,47 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        onButtonClicked()
+        button_showUser.setOnClickListener {
+            onButtonClicked()
+        }
     }
 
-
     private fun onButtonClicked() {
-        button_showUser.setOnClickListener {
-            val username = editText_username.text.toString()
+        val username = editText_username.text.toString()
 
-            if (username.isNotEmpty()) {
-                UserService.getUser(username).enqueue(object : Callback<User> {
-                    override fun onFailure(call: Call<User>, throwable: Throwable?) {
-                        Log.d("UserService.getUser", "onFailure -> $throwable")
+        if (username.isNotEmpty()) {
+            UserService.getUser(username).enqueue(object : Callback<User> {
+                override fun onFailure(call: Call<User>, throwable: Throwable?) {
+                    Log.d("UserService.getUser", "onFailure -> $throwable")
+                    cardView.visibility = View.GONE
+                }
+
+                override fun onResponse(call: Call<User>, response: Response<User>?) {
+                    Log.d("UserService.getUser", "onResponse -> $response - body -> ${response?.body()}")
+
+                    response?.errorBody()?.let {
                         cardView.visibility = View.GONE
+                        return
                     }
 
-                    override fun onResponse(call: Call<User>, response: Response<User>?) {
-                        Log.d("UserService.getUser", "onResponse -> $response - body -> ${response?.body()}")
+                    response?.body()?.apply {
+                        cardView.visibility = View.VISIBLE
 
-                        response?.errorBody()?.let {
-                            cardView.visibility = View.GONE
-                            return
+                        cardView_username.text = username
+                        description?.isNotEmpty().apply {
+                            cardView_description.text = description
                         }
+                        cardView_points.text = getString(R.string.cardView_points_text, points)
 
-                        response?.body()?.apply {
-                            cardView.visibility = View.VISIBLE
-
-                            cardView_username.text = username
-                            description?.isNotEmpty().apply {
-                                cardView_description.text = description
-                            }
-                            cardView_points.text = getString(R.string.cardView_points_text, points)
-
-                            if (hasMasterLevel()) {
-                                cardView_username.setTextColor(getColor(R.color.colorAccent))
-                                cardView_points.setTextColor(getColor(R.color.colorAccent))
-                            }
+                        if (hasMasterLevel()) {
+                            cardView_username.setTextColor(getColor(R.color.colorAccent))
+                            cardView_points.setTextColor(getColor(R.color.colorAccent))
                         }
                     }
-                })
-            } else {
-                cardView.visibility = View.GONE
-            }
+                }
+            })
+        } else {
+            cardView.visibility = View.GONE
         }
     }
 }
