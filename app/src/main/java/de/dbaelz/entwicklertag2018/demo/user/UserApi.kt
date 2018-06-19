@@ -7,12 +7,16 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface UserApi {
-    @GET("user")
+    companion object {
+        private const val USER_RESOURCE = "user"
+    }
+
+    @GET(USER_RESOURCE)
     fun getAllUsers(): Call<List<User>>
 
-    @GET("user/{username}")
+    @GET("$USER_RESOURCE/{username}")
     fun getUser(@Path("username") username: Username): Call<User>
 
-    @POST("user")
+    @POST(USER_RESOURCE)
     fun addUser(@Body user: User): Call<User>
 }

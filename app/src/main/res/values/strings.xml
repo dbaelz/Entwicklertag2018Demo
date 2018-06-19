@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Entwicklertag 2018 Demo</string>
 
-    <string name="title_text">Entwicklersuche</string>
+    <string name="title_text">Kotliner</string>
     <string name="username_hint">Benutzername</string>
     <string name="button_show">Anzeigen</string>
     <string name="cardView_points_text">Punkte: %1$d</string>
