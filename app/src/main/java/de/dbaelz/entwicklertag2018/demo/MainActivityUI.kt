@@ -16,6 +16,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/* An implementation of the UI created with the DSL provided by Anko Layouts
+ * Example usage in MainActivity:
+ *
+ * override fun onCreate(savedInstanceState: Bundle?) {
+ *      super.onCreate(savedInstanceState)
+ *
+ *      MainActivityUI().setContentView(this)
+ *  }
+ */
 class MainActivityUI : AnkoComponent<MainActivity> {
     override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
         linearLayout {

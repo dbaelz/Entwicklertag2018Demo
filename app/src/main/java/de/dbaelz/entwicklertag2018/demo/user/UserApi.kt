@@ -7,6 +7,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface UserApi {
+    // Use a companion object to provide constants or factory methods
     companion object {
         private const val USER_RESOURCE = "user"
     }
